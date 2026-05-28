@@ -1,8 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-coverflow';
 import './globals.css';
 import { siteMeta } from '@/data/site';
 import { AppProviders } from '@/components/app-providers';

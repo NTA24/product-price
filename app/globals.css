@@ -46,15 +46,6 @@ button {
   font: inherit;
 }
 
-.swiper-pagination-bullet {
-  background: #0ea5e9 !important;
-  opacity: 0.35;
-}
-
-.swiper-pagination-bullet-active {
-  opacity: 1;
-}
-
 /* Glow tĩnh + outer blur nhẹ — chữ “TƯƠNG LAI”; chuyển động bounce do Framer */
 .about-hero-kinetic-glow {
   color: #ffffff;

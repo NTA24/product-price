@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
   images: {
     /** Cho phép tối ưu ảnh trong `public/` (Next 15+ có thể chặn nếu không khai báo) */
     localPatterns: [
@@ -9,7 +8,6 @@ const nextConfig = {
       { pathname: '/reasons/**', search: '' },
       { pathname: '/gallery/**', search: '' },
       { pathname: '/certificates/**', search: '' },
-      { pathname: '/service-icons/**', search: '' },
       { pathname: '/solutions/**', search: '' },
       { pathname: '/services/**', search: '' },
       { pathname: '/news/**', search: '' },
