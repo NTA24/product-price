@@ -602,7 +602,6 @@ const footerColumnsVi: FooterColumn[] = [
     links: [
       { label: 'Dịch vụ', href: '#dich-vu' },
       { label: 'Giải pháp', href: '#giai-phap' },
-      { label: 'Sản phẩm', href: '#san-pham' },
       { label: 'Tin tức', href: '#tin-tuc' },
     ],
   },
@@ -630,7 +629,6 @@ const footerColumnsEn: FooterColumn[] = [
     links: [
       { label: 'Services', href: '#dich-vu' },
       { label: 'Solutions', href: '#giai-phap' },
-      { label: 'Products', href: '#san-pham' },
       { label: 'News', href: '#tin-tuc' },
     ],
   },
@@ -677,7 +675,6 @@ export const localizedContent: Record<
       { label: 'Dịch vụ', href: '#dich-vu' },
       { label: 'Giải pháp', href: '#giai-phap' },
       { label: 'Về chúng tôi', href: '#tai-sao' },
-      { label: 'Sản phẩm', href: '#san-pham' },
       { label: 'Tin tức', href: '#tin-tuc' },
       { label: 'Tầm nhìn', href: '#tam-nhin' },
       { label: 'Liên hệ', href: '#lien-he' },
@@ -852,7 +849,6 @@ export const localizedContent: Record<
       { label: 'Services', href: '#dich-vu' },
       { label: 'Solutions', href: '#giai-phap' },
       { label: 'About us', href: '#tai-sao' },
-      { label: 'Products', href: '#san-pham' },
       { label: 'News', href: '#tin-tuc' },
       { label: 'Vision', href: '#tam-nhin' },
       { label: 'Contact', href: '#lien-he' },
