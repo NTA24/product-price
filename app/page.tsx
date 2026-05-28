@@ -4,7 +4,7 @@ import SolutionPriceCalculatorSection from '@/components/sections/solution-price
 export default function Page() {
   return (
     <>
-      <HeroSection />
+      {/* <HeroSection /> */}
       <SolutionPriceCalculatorSection />
     </>
   );

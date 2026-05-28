@@ -40,7 +40,7 @@ export default function HeroSection() {
   return (
     <section
       id="trang-chu"
-      className="relative min-h-[min(88dvh,900px)] overflow-hidden sm:min-h-[min(90vh,900px)]"
+      className="relative min-h-dvh overflow-hidden"
     >
       <div className="absolute inset-0">
         {HERO_SLIDES.map((src, i) => {
