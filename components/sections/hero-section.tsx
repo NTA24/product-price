@@ -3,9 +3,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import Container from '@/components/ui/container';
-import { manropeAboutIntro } from '@/lib/fonts';
-import { useSiteContent } from '@/lib/i18n';
 
 const SLIDE_INTERVAL_MS = 5000;
 
@@ -17,7 +14,6 @@ const HERO_SLIDES = [
 ] as const;
 
 export default function HeroSection() {
-  const content = useSiteContent();
   const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
@@ -44,7 +40,7 @@ export default function HeroSection() {
   return (
     <section
       id="trang-chu"
-      className="relative min-h-[min(88dvh,900px)] overflow-hidden pt-[calc(5.5rem+env(safe-area-inset-top,0px))] sm:min-h-[min(90vh,900px)] sm:pt-28"
+      className="relative min-h-[min(88dvh,900px)] overflow-hidden sm:min-h-[min(90vh,900px)]"
     >
       <div className="absolute inset-0">
         {HERO_SLIDES.map((src, i) => {
@@ -83,18 +79,6 @@ export default function HeroSection() {
           aria-hidden
         />
       </div>
-
-      <Container className="relative z-10 flex min-h-[min(58dvh,560px)] items-center overflow-visible pb-16 pt-6 sm:min-h-[min(68vh,680px)] sm:pb-24 sm:pt-10 lg:pb-32">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className={`${manropeAboutIntro.className} max-w-4xl overflow-visible bg-gradient-to-r from-white via-cyan-100 to-sky-300 bg-clip-text py-2 text-3xl font-black leading-[1.55] tracking-tight text-transparent sm:text-4xl md:text-5xl md:leading-[1.5] lg:text-6xl lg:leading-[1.45] xl:text-7xl xl:leading-[1.4]`}
-          style={{ paddingBottom: '0.25em', WebkitTextFillColor: 'transparent' }}
-        >
-          {content.text.heroHeadline}
-        </motion.h1>
-      </Container>
     </section>
   );
 }

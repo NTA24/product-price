@@ -4,17 +4,6 @@ import type { SolutionPageContent, SolutionSlug } from '@/types/solution-page';
 /** Hero banner — có thể thay bằng asset thiết kế trong `public/` */
 const HERO_IMAGE = '/hero/slide-02.png';
 
-const IMG = {
-  a: '/reasons/reason-security.png',
-  b: '/reasons/reason-office.png',
-  c: '/reasons/reason-vr.png',
-  d: '/hero/slide-01.png',
-  e: '/about/about-grid-1.png',
-  f: '/about/about-grid-2.png',
-  g: '/about/about-grid-3.png',
-  h: '/about/about-grid-4.png',
-};
-
 /** 8 ảnh kịch bản «Giải pháp chung» Smart Home — thứ tự 1→8 (bếp → thang máy → robot → rạp → phòng ngủ → camera → AI → thermostat) */
 const SMART_HOME_GENERAL_IMAGES = [
   '/solutions/smart-home/01.png',

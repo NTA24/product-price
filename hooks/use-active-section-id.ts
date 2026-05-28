@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 /** Offset cố định header fixed (~py-4 + nội dung) — căn mốc “đang ở section nào”. */
 const HEADER_OFFSET = 96;
@@ -12,28 +12,23 @@ const HEADER_OFFSET = 96;
 export function useActiveSectionId(sectionIds: string[]) {
   const [activeId, setActiveId] = useState<string | null>(() => sectionIds[0] ?? null);
   const idsKey = sectionIds.join('|');
-  const sectionIdsRef = useRef(sectionIds);
-  sectionIdsRef.current = sectionIds;
 
   useEffect(() => {
     if (sectionIds.length === 0) return;
 
     const compute = () => {
-      const ids = sectionIdsRef.current;
-      if (ids.length === 0) return;
-
       const scrollLine = window.scrollY + HEADER_OFFSET;
       const atBottom =
         window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8;
 
       if (atBottom) {
-        setActiveId(ids[ids.length - 1] ?? null);
+        setActiveId(sectionIds[sectionIds.length - 1] ?? null);
         return;
       }
 
-      let active = ids[0];
-      for (let i = ids.length - 1; i >= 0; i--) {
-        const id = ids[i];
+      let active = sectionIds[0];
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const id = sectionIds[i];
         const el = document.getElementById(id);
         if (!el) continue;
         const sectionTop = el.getBoundingClientRect().top + window.scrollY;
@@ -55,7 +50,7 @@ export function useActiveSectionId(sectionIds: string[]) {
       document.removeEventListener('scroll', compute, scrollOpts);
       window.removeEventListener('resize', compute);
     };
-  }, [idsKey]);
+  }, [idsKey, sectionIds]);
 
   /** Đồng bộ thanh địa chỉ: kéo scroll thì hash section trên trang chủ (không reload, không nhảy scroll). */
   useEffect(() => {

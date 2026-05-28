@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Hand, Minus, Plus, Sparkles, X } from 'lucide-react';
+import { Hand, Minus, Plus, X } from 'lucide-react';
 import SiteFooter from '@/components/layout/site-footer';
 import SiteHeader from '@/components/layout/site-header';
 import BounceTextMotion from '@/components/ui/bounce-text-motion';
@@ -68,7 +68,6 @@ export default function SolutionPageShell({ slug }: Props) {
   const page = getSolutionPage(locale, slug);
   const isSmartHome = slug === 'smart-home';
   const hasModeList = page.modeItems.length > 0;
-  const contactHref = homeHashHref(pathname, '#lien-he');
   const [smartBuildingCardLightboxSrc, setSmartBuildingCardLightboxSrc] = useState<string | null>(null);
   const [collapsedCardKeys, setCollapsedCardKeys] = useState<Set<string>>(new Set());
 
