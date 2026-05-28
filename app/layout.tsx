@@ -17,10 +17,17 @@ export const metadata: Metadata = {
     locale: 'vi_VN',
     siteName: siteMeta.name,
     url: '/',
+    images: [
+      {
+        url: '/opengraph-image.png',
+        alt: `${siteMeta.name} logo`,
+      },
+    ],
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: pageTitle,
+    images: ['/twitter-image.png'],
   },
 };
 
