@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 44" fill="none" role="img" aria-label="NewGen">
+  <text
+    x="4"
+    y="36"
+    fill="#0f172a"
+    font-family="ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif"
+    font-size="36"
+    font-weight="900"
+    letter-spacing="-0.04em"
+  >
+    <tspan fill="#0284c7">new</tspan><tspan fill="#0f172a">gen</tspan>
+  </text>
+</svg>
