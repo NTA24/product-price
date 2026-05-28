@@ -4,7 +4,6 @@ import { siteMeta } from '@/data/site';
 
 export const metadata: Metadata = {
   title: `About — ${siteMeta.name}`,
-  description: siteMeta.description,
 };
 
 type LayoutProps = {

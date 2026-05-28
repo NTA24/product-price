@@ -6,8 +6,7 @@ import { AppProviders } from '@/components/app-providers';
 import { manropeAboutIntro } from '@/lib/fonts';
 
 export const metadata: Metadata = {
-  title: `${siteMeta.name} - Technology Landing Page`,
-  description: siteMeta.description,
+  title: `${siteMeta.name} - Price Check Tool`,
 };
 
 export const viewport: Viewport = {

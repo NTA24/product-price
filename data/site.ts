@@ -32,8 +32,6 @@ export type Locale = 'vi' | 'en';
 
 export const siteMeta = {
   name: 'NewGen',
-  description:
-    'Landing page demo built with Next.js, TypeScript, Tailwind CSS, Framer Motion and Swiper.js.',
 };
 
 const serviceItemsVi: ServiceItem[] = [

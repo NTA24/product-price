@@ -1,11 +1,27 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { ChevronDown, Minus, Plus } from 'lucide-react';
+import { ChevronDown, Minus, Plus, X } from 'lucide-react';
 import { pricingSolutions, type PricingItem } from '@/data/pricing-solutions';
 import Container from '@/components/ui/container';
 
 type Quantities = Record<string, number>;
+
+function createInitialQuantities(): Quantities {
+  const initial: Quantities = {};
+  for (const solution of pricingSolutions) {
+    for (const item of solution.items) {
+      initial[item.id] = 0;
+    }
+  }
+  return initial;
+}
+
+function getQuantity(quantities: Quantities, itemId: string): number {
+  const value = quantities[itemId];
+  if (value == null || Number.isNaN(value)) return 0;
+  return Math.max(0, Math.floor(value));
+}
 
 const currencyFormatter = new Intl.NumberFormat('vi-VN', {
   style: 'currency',
@@ -36,7 +52,7 @@ function discountedUnitPrice(item: PricingItem, quantity: number) {
 
 export default function SolutionPriceCalculatorSection() {
   const [openIds, setOpenIds] = useState<Set<string>>(() => new Set([pricingSolutions[0]?.id].filter(Boolean)));
-  const [quantities, setQuantities] = useState<Quantities>({});
+  const [quantities, setQuantities] = useState<Quantities>(createInitialQuantities);
 
   const total = useMemo(
     () =>
@@ -44,7 +60,7 @@ export default function SolutionPriceCalculatorSection() {
         (sum, solution) =>
           sum +
           solution.items.reduce((itemSum, item) => {
-            const quantity = quantities[item.id] ?? 0;
+            const quantity = getQuantity(quantities, item.id);
             return itemSum + quantity * discountedUnitPrice(item, quantity);
           }, 0),
         0,
@@ -53,11 +69,18 @@ export default function SolutionPriceCalculatorSection() {
   );
 
   const updateQuantity = (itemId: string, nextQuantity: number) => {
-    setQuantities((current) => ({ ...current, [itemId]: Math.max(0, Math.floor(nextQuantity || 0)) }));
+    const normalized = Number.isNaN(nextQuantity) ? 0 : Math.max(0, Math.floor(nextQuantity));
+    setQuantities((current) => ({ ...current, [itemId]: normalized }));
   };
 
   const setQuantity = (itemId: string, value: string) => {
-    updateQuantity(itemId, Number(value) || 0);
+    const digits = value.replace(/\D/g, '');
+    if (digits === '') {
+      updateQuantity(itemId, 0);
+      return;
+    }
+    const parsed = parseInt(digits, 10);
+    updateQuantity(itemId, Number.isNaN(parsed) ? 0 : parsed);
   };
 
   const toggleSolution = (solutionId: string) => {
@@ -95,7 +118,7 @@ export default function SolutionPriceCalculatorSection() {
           {pricingSolutions.map((solution) => {
             const isOpen = openIds.has(solution.id);
             const solutionTotal = solution.items.reduce((sum, item) => {
-              const quantity = quantities[item.id] ?? 0;
+              const quantity = getQuantity(quantities, item.id);
               return sum + quantity * discountedUnitPrice(item, quantity);
             }, 0);
 
@@ -115,7 +138,7 @@ export default function SolutionPriceCalculatorSection() {
                       {solution.name}
                     </span>
                     <span className="mt-1 block text-xs text-sky-700/70">
-                      {solution.items.length} sản phẩm · Tạm tính {formatCurrency(solutionTotal)}
+                      {solution.items.length} hạng mục · Tạm tính {formatCurrency(solutionTotal)}
                     </span>
                   </span>
                   <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-sky-100 text-sky-700 transition">
@@ -128,7 +151,7 @@ export default function SolutionPriceCalculatorSection() {
 
                 {isOpen ? (
                   <div className="border-t border-slate-100">
-                    <div className="hidden grid-cols-[minmax(0,1fr)_120px_150px_190px] gap-4 bg-sky-50 px-5 py-2 text-xs font-bold uppercase tracking-wider text-sky-700/70 md:grid">
+                    <div className="hidden grid-cols-[minmax(0,1fr)_120px_180px_190px] gap-4 bg-sky-50 px-5 py-2 text-xs font-bold uppercase tracking-wider text-sky-700/70 md:grid">
                       <span>Sản phẩm</span>
                       <span>Đơn vị</span>
                       <span>Số lượng</span>
@@ -136,7 +159,7 @@ export default function SolutionPriceCalculatorSection() {
                     </div>
                     <div className="divide-y divide-slate-100">
                       {solution.items.map((item) => {
-                        const quantity = quantities[item.id] ?? 0;
+                        const quantity = getQuantity(quantities, item.id);
                         const discount = discountFor(item, quantity);
                         const unitPrice = discountedUnitPrice(item, quantity);
                         const hasDiscount = discount != null;
@@ -144,7 +167,7 @@ export default function SolutionPriceCalculatorSection() {
                         return (
                           <div
                             key={item.id}
-                            className="grid gap-3 px-4 py-4 md:grid-cols-[minmax(0,1fr)_120px_150px_190px] md:items-center md:gap-4 md:px-5"
+                            className="grid gap-3 px-4 py-4 md:grid-cols-[minmax(0,1fr)_120px_180px_190px] md:items-center md:gap-4 md:px-5"
                           >
                             <div className="min-w-0">
                               <div className="flex flex-wrap items-center gap-2">
@@ -165,29 +188,41 @@ export default function SolutionPriceCalculatorSection() {
 
                             <p className="text-xs font-medium text-slate-500 md:text-sm">{item.unit || '-'}</p>
 
-                            <div className="flex items-center gap-2">
+                            <div className="inline-flex h-10 items-stretch overflow-hidden rounded-full border border-sky-100 bg-white shadow-sm">
                               <button
                                 type="button"
                                 onClick={() => updateQuantity(item.id, quantity - 1)}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-sky-100 bg-white text-sky-700 shadow-sm transition hover:border-sky-200 hover:bg-sky-50 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40"
+                                className="inline-flex h-10 w-10 shrink-0 items-center justify-center text-sky-700 transition hover:bg-sky-50 active:scale-95 disabled:cursor-not-allowed disabled:text-sky-300"
                                 disabled={quantity <= 0}
                                 aria-label={`Giảm số lượng ${item.name}`}
                               >
                                 <Minus className="h-4 w-4" aria-hidden />
                               </button>
-                              <input
-                                type="number"
-                                min="0"
-                                step="1"
-                                value={quantity}
-                                onChange={(event) => setQuantity(item.id, event.target.value)}
-                                className="h-10 w-16 rounded-full border border-sky-100 bg-sky-50 px-2 text-center text-sm font-bold tabular-nums text-sky-950 outline-none transition focus:border-sky-400 focus:bg-white focus:ring-2 focus:ring-sky-400/20"
-                                aria-label={`Số lượng ${item.name}`}
-                              />
+                              <div className="relative h-10 w-[5.25rem] shrink-0 border-x border-sky-100 bg-sky-50">
+                                <input
+                                  type="text"
+                                  inputMode="numeric"
+                                  autoComplete="off"
+                                  value={String(quantity)}
+                                  onChange={(event) => setQuantity(item.id, event.target.value)}
+                                  className={`h-10 w-full border-0 bg-transparent text-center text-sm font-bold tabular-nums text-sky-950 outline-none transition focus:bg-white ${quantity > 0 ? 'pr-6 pl-1' : 'px-2'}`}
+                                  aria-label={`Số lượng ${item.name}`}
+                                />
+                                {quantity > 0 ? (
+                                  <button
+                                    type="button"
+                                    onClick={() => updateQuantity(item.id, 0)}
+                                    className="absolute right-0.5 top-1/2 inline-flex h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full text-slate-400 transition hover:bg-white hover:text-slate-600 active:scale-95"
+                                    aria-label={`Xóa số lượng ${item.name}`}
+                                  >
+                                    <X className="h-3.5 w-3.5" aria-hidden />
+                                  </button>
+                                ) : null}
+                              </div>
                               <button
                                 type="button"
                                 onClick={() => updateQuantity(item.id, quantity + 1)}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-sky-500 text-white shadow-[0_8px_18px_rgba(14,165,233,0.28)] transition hover:bg-sky-600 active:scale-95"
+                                className="inline-flex h-10 w-10 shrink-0 items-center justify-center bg-sky-500 text-white transition hover:bg-sky-600 active:scale-95"
                                 aria-label={`Tăng số lượng ${item.name}`}
                               >
                                 <Plus className="h-4 w-4" aria-hidden />
