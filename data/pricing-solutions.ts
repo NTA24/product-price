@@ -104,7 +104,7 @@ export const pricingSolutions: PricingSolution[] = [
       },
       {
         "id": "giai-phap-an-ninh-thong-minh-9",
-        "name": "Phần mềm",
+        "name": "Phần mềm (500 người / 1 ngày)",
         "model": "",
         "unit": "Gói",
         "price": 70000000
@@ -323,7 +323,7 @@ export const pricingSolutions: PricingSolution[] = [
       },
       {
         "id": "giai-phap-giam-sat-va-quan-ly-phuong-tien-14",
-        "name": "Phần mềm",
+        "name": "Phần mềm (1000 xe máy hoặc 200 ô tô / 1 ngày)",
         "model": "",
         "unit": "Gói",
         "price": 270000
@@ -490,7 +490,7 @@ export const pricingSolutions: PricingSolution[] = [
       },
       {
         "id": "giai-phap-kiem-soat-con-nguoi-vao-ra-12",
-        "name": "Phần mềm",
+        "name": "Phần mềm (500 người / 1 ngày)",
         "model": "",
         "unit": "Gói",
         "price": 85000000
@@ -782,7 +782,7 @@ export const pricingSolutions: PricingSolution[] = [
       },
       {
         "id": "giai-phap-chieu-sang-thong-minh-19",
-        "name": "Phần mềm",
+        "name": "Phần mềm (1 tầng x 200m2)",
         "model": "",
         "unit": "Gói",
         "price": 12000000
@@ -1053,14 +1053,14 @@ export const pricingSolutions: PricingSolution[] = [
       },
       {
         "id": "giai-phap-van-hanh-thong-minh-ieu-khien-thang-may-quan-ly-nang-luong-16",
-        "name": "Phần mềm điều khiển thang máy",
+        "name": "Phần mềm điều khiển thang máy (1 thang máy)",
         "model": "",
         "unit": "Gói",
         "price": 98500000
       },
       {
         "id": "giai-phap-van-hanh-thong-minh-ieu-khien-thang-may-quan-ly-nang-luong-17",
-        "name": "Phần mềm quản lý năng lượng",
+        "name": "Phần mềm quản lý năng lượng (1000KW / tòa nhà / gói)",
         "model": "",
         "unit": "Gói",
         "price": 150000000
@@ -1366,7 +1366,7 @@ export const pricingSolutions: PricingSolution[] = [
       },
       {
         "id": "giai-phap-video-doorphone-14",
-        "name": "Phần mềm",
+        "name": "Phần mềm (1 thiết bị)",
         "model": "",
         "unit": "Gói",
         "price": 2600000
