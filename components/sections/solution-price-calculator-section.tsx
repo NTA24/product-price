@@ -137,6 +137,11 @@ export default function SolutionPriceCalculatorSection() {
                     <span className="block text-sm font-black uppercase tracking-[0.08em] text-sky-950">
                       {solution.name}
                     </span>
+                    {solution.description ? (
+                      <span className="mt-1 block max-w-4xl text-xs font-medium leading-5 text-slate-600">
+                        {solution.description}
+                      </span>
+                    ) : null}
                     <span className="mt-1 block text-xs text-sky-700/70">
                       {solution.items.length} hạng mục · Tạm tính {formatCurrency(solutionTotal)}
                     </span>

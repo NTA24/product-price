@@ -17,12 +17,14 @@ export type PricingItem = {
 export type PricingSolution = {
   id: string;
   name: string;
+  description?: string;
   items: PricingItem[];
 };
 
 export const pricingSolutions: PricingSolution[] = [
   {
     "id": "giai-phap-an-ninh-thong-minh",
+    "description": "Tính theo số lượng người cần kiểm soát trong 1 ngày, đơn vị 500 người.",
     "name": "GIẢI PHÁP AN NINH THÔNG MINH",
     "items": [
       {
@@ -111,6 +113,7 @@ export const pricingSolutions: PricingSolution[] = [
   },
   {
     "id": "giai-phap-giam-sat-va-quan-ly-phuong-tien",
+    "description": "Tính theo lượng phương tiện cần quản lý trong 1 ngày. Đơn vị: 120tr/1000 xe máy; 150tr/200 ô tô.",
     "name": "GIẢI PHÁP GIÁM SÁT VÀ QUẢN LÝ PHƯƠNG TIỆN",
     "items": [
       {
@@ -329,6 +332,7 @@ export const pricingSolutions: PricingSolution[] = [
   },
   {
     "id": "giai-phap-kiem-soat-con-nguoi-vao-ra",
+    "description": "Tính theo lượng người cần kiểm soát trong 1 ngày. Đơn vị: 85tr/500 người.",
     "name": "GIẢI PHÁP KIỂM SOÁT CON NGƯỜI VÀO/RA",
     "items": [
       {
@@ -495,6 +499,7 @@ export const pricingSolutions: PricingSolution[] = [
   },
   {
     "id": "giai-phap-chieu-sang-thong-minh",
+    "description": "Tính theo số lượng tầng x diện tích chiếu sáng. 1 đơn vị tính: 1 tầng x 200m2.",
     "name": "GIẢI PHÁP CHIẾU SÁNG THÔNG MINH",
     "items": [
       {
@@ -786,6 +791,7 @@ export const pricingSolutions: PricingSolution[] = [
   },
   {
     "id": "giai-phap-van-hanh-thong-minh-ieu-khien-thang-may-quan-ly-nang-luong",
+    "description": "Quản lý năng lượng: tính theo quy mô công suất tiêu thụ định mức của tòa nhà, 1 đơn vị tính: 1000KW/tòa nhà/gói. Điều khiển thang máy: tính theo số thang máy.",
     "name": "GIẢI PHÁP VẬN HÀNH THÔNG MINH (ĐIỀU KHIỂN THANG MÁY, QUẢN LÝ NĂNG LƯỢNG)",
     "items": [
       {
@@ -1207,6 +1213,7 @@ export const pricingSolutions: PricingSolution[] = [
   },
   {
     "id": "giai-phap-video-doorphone",
+    "description": "Tính theo số lượng thiết bị.",
     "name": "GIẢI PHÁP VIDEO DOORPHONE",
     "items": [
       {
